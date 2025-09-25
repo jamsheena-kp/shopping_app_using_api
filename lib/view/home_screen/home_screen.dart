@@ -207,8 +207,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                               context,
                                               MaterialPageRoute(
                                                 builder:
-                                                    (context) =>
-                                                        DetailsScreen(),
+                                                    (context) => DetailsScreen(
+                                                      productId:
+                                                          homeProvider
+                                                              .productList[index]
+                                                              .id
+                                                              .toString(),
+                                                    ),
                                               ),
                                             );
                                           },

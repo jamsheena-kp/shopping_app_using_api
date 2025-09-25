@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shopping_app_using_api/controller/details_Screen_controller.dart';
 
 class DetailsScreen extends StatefulWidget {
-  const DetailsScreen({super.key});
+  const DetailsScreen({super.key, required this.productId});
+  final String productId;
 
   @override
   State<DetailsScreen> createState() => _DetailsScreenState();
@@ -9,7 +12,18 @@ class DetailsScreen extends StatefulWidget {
 
 class _DetailsScreenState extends State<DetailsScreen> {
   @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      context.read<DetailsScreenController>().fetchProductDetails(
+        prodId: widget.productId,
+      );
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final detailsProvider = context.watch<DetailsScreenController>();
     return Scaffold(
       bottomNavigationBar: Container(
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
@@ -25,7 +39,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 Text("Price", style: TextStyle(color: Colors.grey)),
                 SizedBox(height: 4),
                 Text(
-                  "PKR 1,190",
+                  detailsProvider.productDetails?.price.toString() ?? "",
                   style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
@@ -87,7 +101,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       color: Colors.white,
                       image: DecorationImage(
                         image: NetworkImage(
-                          "https://media.istockphoto.com/id/1542566108/photo/young-businessman-smiling-at-camera.webp?s=2048x2048&w=is&k=20&c=fhjNCzVb8pijG09XiptTOKwucLpyD6jVy0VzsZW2FaY=",
+                          detailsProvider.productDetails?.thumbnail
+                                  .toString() ??
+                              "",
                         ),
                         fit: BoxFit.cover,
                       ),
@@ -103,7 +119,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
             ),
             SizedBox(height: 5),
             Text(
-              "Regular fit slogan",
+              detailsProvider.productDetails?.title?.toString() ?? "",
               style: TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
@@ -119,11 +135,14 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     children: [
                       TextSpan(
                         style: TextStyle(color: Colors.black),
-                        text: "4.5/5 ",
+                        text:
+                            detailsProvider.productDetails?.rating.toString() ??
+                            "",
                       ),
                       TextSpan(
                         style: TextStyle(color: Colors.grey),
-                        text: "(45 reviews)",
+                        text:
+                            "${detailsProvider.productDetails?.reviews?.length ?? ""}",
                       ),
                     ],
                   ),
@@ -132,44 +151,44 @@ class _DetailsScreenState extends State<DetailsScreen> {
             ),
             SizedBox(height: 14),
             Text(
-              "The name says it all, the right size slightly snugs the body leaving enough room for comfort in the sleeves and waist.",
+              detailsProvider.productDetails?.description.toString() ?? "",
               style: TextStyle(color: Colors.blueGrey),
             ),
             SizedBox(height: 20),
-            Text(
-              "Choose size",
-              style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 10),
-            Row(
-              children:
-                  ["S", "M", "L"].map((size) {
-                    return Padding(
-                      padding: EdgeInsets.only(right: 8),
-                      child: Container(
-                        height: 35,
-                        width: 35,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(7),
-                          border: Border.all(color: Colors.black),
-                        ),
-                        child: Center(
-                          child: Text(
-                            size,
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ),
-                    );
-                  }).toList(),
-            ),
+            // Text(
+            //   "Choose size",
+            //   style: TextStyle(
+            //     color: Colors.black,
+            //     fontWeight: FontWeight.bold,
+            //   ),
+            // ),
+            // SizedBox(height: 10),
+            // Row(
+            //   children:
+            //       ["S", "M", "L"].map((size) {
+            //         return Padding(
+            //           padding: EdgeInsets.only(right: 8),
+            //           child: Container(
+            //             height: 35,
+            //             width: 35,
+            //             decoration: BoxDecoration(
+            //               color: Colors.white,
+            //               borderRadius: BorderRadius.circular(7),
+            //               border: Border.all(color: Colors.black),
+            //             ),
+            //             child: Center(
+            //               child: Text(
+            //                 size,
+            //                 style: TextStyle(
+            //                   color: Colors.black,
+            //                   fontWeight: FontWeight.bold,
+            //                 ),
+            //               ),
+            //             ),
+            //           ),
+            //         );
+            //       }).toList(),
+            // ),
           ],
         ),
       ),
