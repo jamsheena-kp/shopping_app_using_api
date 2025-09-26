@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shopping_app_using_api/controller/details_Screen_controller.dart';
 import 'package:shopping_app_using_api/controller/search_screen_controller.dart';
 import 'package:shopping_app_using_api/view/details_screen/details_screen.dart';
 

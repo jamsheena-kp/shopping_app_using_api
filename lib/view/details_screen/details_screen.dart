@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shopping_app_using_api/controller/cart_controller.dart';
+import 'package:shopping_app_using_api/view/cart_screen/widget/cart_screen.dart';
 import 'package:shopping_app_using_api/controller/details_Screen_controller.dart';
 
 class DetailsScreen extends StatefulWidget {
@@ -49,7 +51,16 @@ class _DetailsScreenState extends State<DetailsScreen> {
               ],
             ),
             ElevatedButton.icon(
-              onPressed: () {},
+              onPressed: () {
+                context.read<CartController>().addToCart(
+                  context,
+                  detailsProvider.productDetails!,
+                );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => CartScreen()),
+                );
+              },
               icon: Icon(Icons.shopping_cart_outlined, color: Colors.white),
               label: Text("Add to Cart", style: TextStyle(color: Colors.white)),
               style: ElevatedButton.styleFrom(
@@ -155,40 +166,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
               style: TextStyle(color: Colors.blueGrey),
             ),
             SizedBox(height: 20),
-            // Text(
-            //   "Choose size",
-            //   style: TextStyle(
-            //     color: Colors.black,
-            //     fontWeight: FontWeight.bold,
-            //   ),
-            // ),
-            // SizedBox(height: 10),
-            // Row(
-            //   children:
-            //       ["S", "M", "L"].map((size) {
-            //         return Padding(
-            //           padding: EdgeInsets.only(right: 8),
-            //           child: Container(
-            //             height: 35,
-            //             width: 35,
-            //             decoration: BoxDecoration(
-            //               color: Colors.white,
-            //               borderRadius: BorderRadius.circular(7),
-            //               border: Border.all(color: Colors.black),
-            //             ),
-            //             child: Center(
-            //               child: Text(
-            //                 size,
-            //                 style: TextStyle(
-            //                   color: Colors.black,
-            //                   fontWeight: FontWeight.bold,
-            //                 ),
-            //               ),
-            //             ),
-            //           ),
-            //         );
-            //       }).toList(),
-            // ),
           ],
         ),
       ),
