@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping_app_using_api/controller/home_screen_controller.dart';
 import 'package:shopping_app_using_api/view/details_screen/details_screen.dart';
+import 'package:shopping_app_using_api/view/search_screen/search_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -13,64 +14,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int select = 0;
   bool isSelected = false;
-  // List<Map<String, dynamic>> dressItem = [
-  //   {
-  //     "image":
-  //         "https://media.istockphoto.com/id/1542566108/photo/young-businessman-smiling-at-camera.jpg?s=2048x2048&w=is&k=20&c=fhjNCzVb8pijG09XiptTOKwucLpyD6jVy0VzsZW2FaY=",
-  //     "title": "Regular fit slogan",
-  //     "subtitle": "PKR 1,190",
-  //     "icon": Icon(Icons.favorite_outline, color: Colors.black),
-  //   },
-  //   {
-  //     "image":
-  //         "https://media.istockphoto.com/id/1542566108/photo/young-businessman-smiling-at-camera.jpg?s=2048x2048&w=is&k=20&c=fhjNCzVb8pijG09XiptTOKwucLpyD6jVy0VzsZW2FaY=",
-  //     "title": "Regular fit polo",
-  //     "subtitle": "PKR 1,100 -52%",
-  //     "icon": Icon(Icons.favorite_outline, color: Colors.black),
-  //   },
-  //   {
-  //     "image":
-  //         "https://media.istockphoto.com/id/1542566108/photo/young-businessman-smiling-at-camera.jpg?s=2048x2048&w=is&k=20&c=fhjNCzVb8pijG09XiptTOKwucLpyD6jVy0VzsZW2FaY=",
-  //     "title": "Regular fit color block",
-  //     "subtitle": "PKR 1,690",
-  //     "icon": Icon(Icons.favorite_outline, color: Colors.black),
-  //   },
-  //   {
-  //     "image":
-  //         "https://media.istockphoto.com/id/1542566108/photo/young-businessman-smiling-at-camera.jpg?s=2048x2048&w=is&k=20&c=fhjNCzVb8pijG09XiptTOKwucLpyD6jVy0VzsZW2FaY=",
-  //     "title": "Regular fit v-neck",
-  //     "subtitle": "PKR 1,290",
-  //     "icon": Icon(Icons.favorite_outline, color: Colors.black),
-  //   },
-  //   {
-  //     "image":
-  //         "https://media.istockphoto.com/id/1542566108/photo/young-businessman-smiling-at-camera.jpg?s=2048x2048&w=is&k=20&c=fhjNCzVb8pijG09XiptTOKwucLpyD6jVy0VzsZW2FaY=",
-  //     "title": "Regular fit slogan",
-  //     "subtitle": "PKR 1,190",
-  //     "icon": Icon(Icons.favorite_outline, color: Colors.black),
-  //   },
-  //   {
-  //     "image":
-  //         "https://media.istockphoto.com/id/1542566108/photo/young-businessman-smiling-at-camera.jpg?s=2048x2048&w=is&k=20&c=fhjNCzVb8pijG09XiptTOKwucLpyD6jVy0VzsZW2FaY=",
-  //     "title": "Regular fit color block",
-  //     "subtitle": "PKR 1,690",
-  //     "icon": Icon(Icons.favorite_outline, color: Colors.black),
-  //   },
-  //   {
-  //     "image":
-  //         "https://media.istockphoto.com/id/1542566108/photo/young-businessman-smiling-at-camera.jpg?s=2048x2048&w=is&k=20&c=fhjNCzVb8pijG09XiptTOKwucLpyD6jVy0VzsZW2FaY=",
-  //     "title": "Regular fit color block",
-  //     "subtitle": "PKR 1,690",
-  //     "icon": Icon(Icons.favorite_outline, color: Colors.black),
-  //   },
-  //   {
-  //     "image":
-  //         "https://media.istockphoto.com/id/1542566108/photo/young-businessman-smiling-at-camera.jpg?s=2048x2048&w=is&k=20&c=fhjNCzVb8pijG09XiptTOKwucLpyD6jVy0VzsZW2FaY=",
-  //     "title": "Regular fit color block",
-  //     "subtitle": "PKR 1,690",
-  //     "icon": Icon(Icons.favorite_outline, color: Colors.black),
-  //   },
-  // ];
+
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
@@ -102,6 +46,12 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 Expanded(
                   child: TextFormField(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => SearchScreen()),
+                      );
+                    },
                     decoration: InputDecoration(
                       label: Text("Search anything"),
                       labelStyle: TextStyle(color: Colors.grey),
